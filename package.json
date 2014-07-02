@@ -1,6 +1,8 @@
 {
   "name": "checkin",
   "version": "0.0.1",
+  "description": "Checkin app",
+  "main": "app.js",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -13,7 +15,15 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0",
-    "mongodb":"*",
-    "monk":"*"
+    "mongodb": "*",
+    "monk": "*",
+    "logfmt": "~1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:swoloszynski/checkin.git"
+  },
+  "engines": {
+    "node": "0.10.22"
   }
 }
