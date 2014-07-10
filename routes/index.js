@@ -23,14 +23,16 @@ router.get('/sendtext', function(req, res) {
 	    if (!error) {
 	        console.log('Success! The SID for this SMS message is:');
 	        console.log(message.sid);
-	 
+
 	        console.log('Message sent on:');
 	        console.log(message.dateCreated);
+	        res.render('sendtext', { result: true })
 	    } else {
 	        console.log('Oops! There was an error.');
+	        res.render('sendtext', { result: false })
 	    }
 	});
-    res.render('sendtext', { message: 'Hello!' })
+
 });
 
 module.exports = router;
