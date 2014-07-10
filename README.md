@@ -6,7 +6,7 @@
 
 ## Run Locally
 
-```foreman start```
+```MY_NUM=+12345678910 TWILIO_NUM=+12345678911 foreman start```
 
 [Runs on port 5000](http://localhost:5000/)
 

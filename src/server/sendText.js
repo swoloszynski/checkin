@@ -1,14 +1,15 @@
 var twilio = require('twilio');
 var client = new twilio.RestClient();
+var TWILIO_NUMBER = process.env.TWILIO_NUM;
 
 var SendText = {
   test: function(){
     return "test";
   },
-  send: function() {
+  send: function(number) {
     client.sendSms({
-      to:'+17036257313',
-      from:'+17039917263',
+      to: number,
+      from: TWILIO_NUMBER,
       body:'HI FROM SAM'
     }, function(error, message) {
         if (!error) {
