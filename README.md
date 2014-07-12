@@ -2,11 +2,15 @@
 
 **Phone number:** On the twilio account page, testing phone numbers must be verified.
 
-**Environment variables:** Set *TWILIO\_ACCOUNT\_SID* and *TWILIO\_AUTH\_TOKEN* locally and on Heroku app settings.
+**Environment variables:** Set *TWILIO\_ACCOUNT\_SID*, *TWILIO\_AUTH\_TOKEN*, *MY\_NUM*, and *TWILIO\_NUM* locally and on Heroku app settings.
 
 ## Run Locally
 
-```MY_NUM=+12345678910 TWILIO_NUM=+12345678911 foreman start```
+```foreman start```
+
+or
+
+```TWILIO_ACCOUNT_SID=123abc TWILIO_AUTH_TOKEN=123abc MY_NUM=+12345678910 TWILIO_NUM=+12345678911 foreman start```
 
 [Runs on port 5000](http://localhost:5000/)
 
