@@ -14,8 +14,13 @@ router.get('/helloworld', function(req, res) {
 });
 
 /* GET send text page. */
-router.get('/sendtext', function(req, res) {
-  SendText.send(testNumber);
+router.get('/sendtext/:message?', function(req, res) {
+	if(req.params.message){
+		SendText.send(testNumber, req.params.message);
+	}
+	else {
+  	SendText.send(testNumber);
+	}
   res.render('sendtext')
 });
 

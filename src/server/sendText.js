@@ -1,16 +1,21 @@
 var twilio = require('twilio');
 var client = new twilio.RestClient();
 var TWILIO_NUMBER = process.env.TWILIO_NUM;
+var DEFAULT_MESSAGE = "Hi from Sam's app! (default)";
 
 var SendText = {
   test: function(){
     return "test";
   },
-  send: function(number) {
+  send: function(number, message) {
+    var body = DEFAULT_MESSAGE;
+    if(message) {
+      body = message;
+    }
     client.sendSms({
       to: number,
       from: TWILIO_NUMBER,
-      body:'HI FROM SAM'
+      body: body
     }, function(error, message) {
         if (!error) {
             console.log('Success! The SID for this SMS message is:');
