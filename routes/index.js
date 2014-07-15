@@ -24,4 +24,13 @@ router.get('/sendtext/:message?', function(req, res) {
   res.render('sendtext')
 });
 
+router.get('/receivetext', function(req, res) {
+  var response = "";
+  response = Sms.generateTwiml(testNumber);
+  res.writeHead(200, {
+        'Content-Type':'text/xml'
+    });
+  res.end(response);
+});
+
 module.exports = router;

@@ -26,6 +26,13 @@ var Sms = {
             return false;
         }
     });
+  },
+
+  generateTwiml: function(number) {
+    var body = DEFAULT_MESSAGE;
+    var resp = new twilio.TwimlResponse();
+    resp.sms({to: number, from: TWILIO_NUMBER}, body);
+    return resp.toString();
   }
 
 };
