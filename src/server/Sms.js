@@ -4,9 +4,6 @@ var TWILIO_NUMBER = process.env.TWILIO_NUM;
 var DEFAULT_MESSAGE = "Hi from Sam's app! (default)";
 
 var Sms = {
-  test: function(){
-    return "test";
-  },
   send: function(number, message) {
     var body = DEFAULT_MESSAGE;
     if(message) {
