@@ -3,7 +3,7 @@ var client = new twilio.RestClient();
 var TWILIO_NUMBER = process.env.TWILIO_NUM;
 var DEFAULT_MESSAGE = "Hi from Sam's app! (default)";
 
-var SendText = {
+var Sms = {
   test: function(){
     return "test";
   },
@@ -33,4 +33,4 @@ var SendText = {
 
 };
 
-module.exports = SendText;
+module.exports = Sms;

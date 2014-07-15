@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var SendText = require('../src/server/sendText.js');
+var Sms = require('../src/server/Sms.js');
 var testNumber = process.env.MY_NUM;
 
 /* GET home page. */
@@ -16,10 +16,10 @@ router.get('/helloworld', function(req, res) {
 /* GET send text page. */
 router.get('/sendtext/:message?', function(req, res) {
 	if(req.params.message){
-		SendText.send(testNumber, req.params.message);
+		Sms.send(testNumber, req.params.message);
 	}
 	else {
-  	SendText.send(testNumber);
+  	Sms.send(testNumber);
 	}
   res.render('sendtext')
 });
