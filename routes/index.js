@@ -24,6 +24,22 @@ router.get('/sendtext/:message?', function(req, res) {
   res.render('sendtext')
 });
 
+/* Form for sending text */
+
+router.get('/sms', function(req, res) {
+  res.render('sms');
+});
+
+router.post('/sms', function(req, res) {
+  if (req.body.message != "") {
+    Sms.send(testNumber, req.body.message)
+    res.render('sms', { message: req.body.message });
+  }
+  else {
+    res.render('sms', { warning: "No message entered" });
+  }
+});
+
 router.get('/receivetext', function(req, res) {
   var response = "";
   response = Sms.generateTwiml(testNumber);
