@@ -18,7 +18,9 @@
     "mongodb": "*",
     "monk": "*",
     "logfmt": "~1.1.2",
-    "twilio": "~1.6.0"
+    "twilio": "~1.6.0",
+    "express-validator": "~2.3.0",
+    "html-css-sanitizer": "0.0.3"
   },
   "repository": {
     "type": "git",

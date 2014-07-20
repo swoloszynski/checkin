@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Sms = require('../src/server/Sms.js');
 var testNumber = process.env.MY_NUM;
+var util = require('util');
+var sanitize = require('html-css-sanitizer').sanitize;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -31,12 +33,17 @@ router.get('/sms', function(req, res) {
 });
 
 router.post('/sms', function(req, res) {
-  if (req.body.message != "") {
-    Sms.send(testNumber, req.body.message)
-    res.render('sms', { message: req.body.message });
+  req.checkBody('message', 'Empty message field').notEmpty();
+  req.checkBody('message', 'Message contains non-alpha characters').isAlpha();
+  var errors = req.validationErrors();
+  if (errors) {
+    console.log(util.inspect(errors));
+    res.render('sms', { warning: "Invalid message" });
   }
   else {
-    res.render('sms', { warning: "No message entered" });
+    var message = sanitize(req.body.message);
+    Sms.send(testNumber, message);
+    res.render('sms', { message: message });
   }
 });
 
