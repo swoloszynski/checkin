@@ -34,7 +34,6 @@ router.get('/sms', function(req, res) {
 
 router.post('/sms', function(req, res) {
   req.checkBody('message', 'Empty message field').notEmpty();
-  req.checkBody('message', 'Message contains non-alpha characters').isAlpha();
   var errors = req.validationErrors();
   if (errors) {
     console.log(util.inspect(errors));
