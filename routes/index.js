@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Sms = require('../src/server/Sms.js');
+var database = require('../src/server/database.js');
 var testNumber = process.env.MY_NUM;
 var util = require('util');
 var sanitize = require('html-css-sanitizer').sanitize;
@@ -24,6 +25,14 @@ router.get('/sendtext/:message?', function(req, res) {
   	Sms.send(testNumber);
 	}
   res.render('sendtext')
+});
+
+/* connect with db */
+
+router.get('/db', function(req, res) {
+  var item = { name:"testItem", phone: "+17037037033" };
+  database.insert("user", item);
+  res.render('helloworld', { title: 'DB' });
 });
 
 /* Form for sending text */
