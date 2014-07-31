@@ -31,7 +31,8 @@ var Sms = {
   generateTwiml: function(number) {
     var body = DEFAULT_MESSAGE;
     var resp = new twilio.TwimlResponse();
-    resp.sms({to: number, from: TWILIO_NUMBER}, body);
+    opts = {};
+    resp.message(opts, body);
     return resp.toString();
   }
 
