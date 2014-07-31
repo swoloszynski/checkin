@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div.results
+    h1 Database collection: #{collectionName}
+    div.items
+      ul
+        if users
+          for user in users
+            li= user.name
+          else
+            li No users!
+        else
+          p No results

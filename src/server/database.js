@@ -22,6 +22,28 @@ var database = {
         console.log(err);
       }
     });
+  },
+
+  get: function(collectionName, cb) {
+    mongo.Db.connect(mongoUri, function (err, db) {
+      if (!err) {
+        console.log("Connected to database: '" + databaseName + "' to get things");
+        db.collection(collectionName, function(er, collection) {
+          collection.find().toArray(function(err, items) {
+            if (!err) {
+              // console.log(items);
+              cb(items);
+            }
+            else {
+              console.log("Error retrieving collection: " + collectionName);
+            }
+          });
+        });
+      }
+      else {
+        console.log(err);
+      }
+    });
   }
 
 };
