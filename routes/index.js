@@ -27,12 +27,33 @@ router.get('/sendtext/:message?', function(req, res) {
   res.render('sendtext')
 });
 
-/* connect with db */
+/* Connect to database and do simple insert */
 
 router.get('/db', function(req, res) {
   var item = { name:"testItem", phone: "+17037037033" };
   database.insert("user", item);
   res.render('helloworld', { title: 'DB' });
+});
+
+router.get('/database', function(req, res) {
+  res.render('database');
+});
+
+router.post('/database', function(req, res) {
+  req.checkBody('username', 'Empty message field').notEmpty();
+  var errors = req.validationErrors();
+  if (errors) {
+    console.log(util.inspect(errors));
+    var errorMessage = "Blank name field";
+    res.render('database', { warning: errorMessage });
+  }
+  else {
+    var username = sanitize(req.body.username);
+    var user = {name: username};
+    database.insert("user", user);
+    var successMessage = "Inserted '" + username + "'";
+    res.render('database', { message: successMessage });
+  }
 });
 
 /* Form for sending text */
