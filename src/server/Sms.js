@@ -29,7 +29,7 @@ var Sms = {
   },
 
   generateTwiml: function(number, receivedMessage) {
-    var body = "You sent: '" + receivedMessage.from + "'";
+    var body = "You sent: '" + receivedMessage.body + "'";
     var resp = new twilio.TwimlResponse();
     opts = {};
     resp.message(opts, body);

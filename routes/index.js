@@ -51,16 +51,16 @@ router.post('/sms', function(req, res) {
   }
 });
 
-router.get('/receivetext', function(req, res) {
+router.post('/receivetext', function(req, res) {
   if (twilio.validateExpressRequest(req, TWILIO_AUTH_TOKEN)) {
     var response = "";
     var receivedMessage = {
-      messageSid: req.params.MessageSid,
-      accountSid: req.params.AcccountSid,
-      from      : req.params.From,
-      to        : req.params.To,
-      body      : req.params.Body,
-      numMedia  : req.params.NumMedia
+      messageSid: req.body.MessageSid,
+      accountSid: req.body.AcccountSid,
+      from      : req.body.From,
+      to        : req.body.To,
+      body      : req.body.Body,
+      numMedia  : req.body.NumMedia
     };
     response = Sms.generateTwiml(testNumber, receivedMessage);
     res.writeHead(200, {
