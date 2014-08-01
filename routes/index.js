@@ -11,6 +11,7 @@ var database          = require('../src/server/database.js');
 
 var testNumber        = process.env.MY_NUM;
 var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+var COLL_USER         = "user";
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -37,7 +38,7 @@ router.get('/sendtext/:message?', function(req, res) {
 
 router.get('/db', function(req, res) {
   var item = { name:"testItem", phone: "+17037037033" };
-  database.insert("user", item);
+  database.insert(COLL_USER, item);
   res.render('helloworld', { title: 'DB' });
 });
 
@@ -103,6 +104,7 @@ router.post('/receivetext', function(req, res) {
       body      : req.body.Body,
       numMedia  : req.body.NumMedia
     };
+    database.insert(COLL_USER, receivedMessage);
     response = Sms.generateTwiml(testNumber, receivedMessage);
     res.writeHead(200, {
           'Content-Type':'text/xml'
