@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var Sms = require('../src/server/Sms.js');
-var testNumber = process.env.MY_NUM;
-var util = require('util');
-var sanitize = require('html-css-sanitizer').sanitize;
+var express           = require('express');
+var router            = express.Router();
+
+var util              = require('util');
+var sanitize          = require('html-css-sanitizer').sanitize;
+var twilio            = require('twilio');
+
+var Sms               = require('../src/server/Sms.js');
+
+var testNumber        = process.env.MY_NUM;
+var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -47,12 +52,17 @@ router.post('/sms', function(req, res) {
 });
 
 router.get('/receivetext', function(req, res) {
-  var response = "";
-  response = Sms.generateTwiml(testNumber);
-  res.writeHead(200, {
-        'Content-Type':'text/xml'
-    });
-  res.end(response);
+  if (twilio.validateExpressRequest(req, TWILIO_AUTH_TOKEN)) {
+    var response = "";
+    response = Sms.generateTwiml(testNumber);
+    res.writeHead(200, {
+          'Content-Type':'text/xml'
+      });
+    res.end(response);
+  }
+  else {
+    res.render('unauthorized', {message: "Unauthorized request"});
+  }
 });
 
 module.exports = router;
