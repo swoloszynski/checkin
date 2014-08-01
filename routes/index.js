@@ -58,6 +58,17 @@ router.get('/receivetext', function(req, res) {
     res.writeHead(200, {
           'Content-Type':'text/xml'
       });
+
+    var receivedMessage = {
+      messageSid: req.params.MessageSid,
+      accountSid: req.params.AcccountSid,
+      from      : req.params.From,
+      to        : req.params.To,
+      body      : req.params.Body,
+      numMedia  : req.params.NumMedia
+    };
+
+    console.log(receivedMessage.body);
     res.end(response);
   }
   else {
