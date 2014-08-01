@@ -28,8 +28,8 @@ var Sms = {
     });
   },
 
-  generateTwiml: function(number) {
-    var body = DEFAULT_MESSAGE;
+  generateTwiml: function(number, receivedMessage) {
+    var body = "You sent: '" + receivedMessage.from + "'";
     var resp = new twilio.TwimlResponse();
     opts = {};
     resp.message(opts, body);

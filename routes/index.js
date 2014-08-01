@@ -54,11 +54,6 @@ router.post('/sms', function(req, res) {
 router.get('/receivetext', function(req, res) {
   if (twilio.validateExpressRequest(req, TWILIO_AUTH_TOKEN)) {
     var response = "";
-    response = Sms.generateTwiml(testNumber);
-    res.writeHead(200, {
-          'Content-Type':'text/xml'
-      });
-
     var receivedMessage = {
       messageSid: req.params.MessageSid,
       accountSid: req.params.AcccountSid,
@@ -67,7 +62,10 @@ router.get('/receivetext', function(req, res) {
       body      : req.params.Body,
       numMedia  : req.params.NumMedia
     };
-
+    response = Sms.generateTwiml(testNumber, receivedMessage);
+    res.writeHead(200, {
+          'Content-Type':'text/xml'
+    });
     console.log(receivedMessage.body);
     res.end(response);
   }
