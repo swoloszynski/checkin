@@ -3,7 +3,25 @@ extends layout
 block content
   h3 Insert into database
   form(method="post", action="/database")
-      input(type="text", name="username")
+    div.dbInput
+      label.dbLabel messageSid
+        input(type="text", name="MessageSid", value="000001")
+    div.dbInput
+      label.dbLabel accountSid
+        input(type="text", name="AccountSid", value="100001")
+    div.dbInput
+      label.dbLabel from
+        input(type="text", name="From", value="+17031112222")
+    div.dbInput
+      label.dbLabel to
+        input(type="text", name="To", value="+17031113333")
+    div.dbInput
+      label.dbLabel message body
+        input(type="text", name="Body")
+    div.dbInput
+      label.dbLabel numMedia
+        input(type="text", name="NumMedia", value=0)
+    div.dbInput
       input(type="submit")
     if message
       p= message

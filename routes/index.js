@@ -24,18 +24,32 @@ router.get('/database', function(req, res) {
 });
 
 router.post('/database', function(req, res) {
-  req.checkBody('username', 'Empty message field').notEmpty();
+  req.checkBody('Body', 'Empty message body field').notEmpty();
   var errors = req.validationErrors();
   if (errors) {
     console.log(util.inspect(errors));
-    var errorMessage = "Blank name field";
+    var errorMessage = "Blank message body field";
     res.render('database', { warning: errorMessage });
   }
   else {
-    var username = sanitize(req.body.username);
-    var user = {name: username};
-    database.insert("user", user);
-    var successMessage = "Inserted '" + username + "'";
+    var messageSid = sanitize(req.body.MessageSid);
+    var acccountSid = sanitize(req.body.AcccountSid);
+    var from = sanitize(req.body.From);
+    var to = sanitize(req.body.To);
+    var body = sanitize(req.body.Body);
+    var numMedia = sanitize(req.body.NumMedia);
+
+    var receivedMessage = {
+      messageSid: messageSid,
+      accountSid: acccountSid,
+      from      : from,
+      to        : to,
+      body      : body,
+      numMedia  : numMedia
+    };
+
+    database.insert("user", receivedMessage);
+    var successMessage = "Inserted '" + body + "'";
     res.render('database', { message: successMessage });
   }
 });
