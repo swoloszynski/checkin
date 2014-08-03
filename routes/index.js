@@ -58,8 +58,6 @@ router.post('/database', function(req, res) {
 router.get('/display', function(req, res) {
   var collectionName = "user";
   database.get(collectionName, function(users) {
-    console.log("users");
-    console.log(users)
     var opts = { collectionName: collectionName, users: users };
     res.render('databaseDisplay', opts);
   });

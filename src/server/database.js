@@ -31,7 +31,6 @@ var database = {
         db.collection(collectionName, function(er, collection) {
           collection.find().toArray(function(err, items) {
             if (!err) {
-              // console.log(items);
               cb(items);
             }
             else {
