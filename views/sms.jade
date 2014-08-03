@@ -1,12 +1,11 @@
-doctype html
-html
-  head
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    form(method="post", action="/sms")
-      input(type="text", name="message")
-      input(type="submit")
-    if message
-      p Sending "#{message}"
-    else if warning
-      p= warning
+extends layout
+
+block content
+  h3 Send SMS to Sam!
+  form(method="post", action="/sms")
+    input(type="text", name="message")
+    input(type="submit")
+  if message
+    p Sending "#{message}"
+  else if warning
+    p= warning

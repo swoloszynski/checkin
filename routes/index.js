@@ -15,33 +15,10 @@ var COLL_USER         = "user";
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Checkin' });
 });
 
-/* GET Hello World page. */
-router.get('/helloworld', function(req, res) {
-    res.render('helloworld', { title: 'Hello, World!' })
-});
-
-/* GET send text page. */
-router.get('/sendtext/:message?', function(req, res) {
-	if(req.params.message){
-		Sms.send(testNumber, req.params.message);
-	}
-	else {
-  	Sms.send(testNumber);
-	}
-  res.render('sendtext')
-});
-
-/* Connect to database and do simple insert */
-
-router.get('/db', function(req, res) {
-  var item = { name:"testItem", phone: "+17037037033" };
-  database.insert(COLL_USER, item);
-  res.render('helloworld', { title: 'DB' });
-});
-
+/* Form to insert into database */
 router.get('/database', function(req, res) {
   res.render('database');
 });
@@ -63,6 +40,7 @@ router.post('/database', function(req, res) {
   }
 });
 
+/* Display database contents */
 router.get('/display', function(req, res) {
   var collectionName = "user";
   database.get(collectionName, function(users) {
@@ -74,7 +52,6 @@ router.get('/display', function(req, res) {
 });
 
 /* Form for sending text */
-
 router.get('/sms', function(req, res) {
   res.render('sms');
 });
@@ -93,6 +70,9 @@ router.post('/sms', function(req, res) {
   }
 });
 
+/* Receive text via POST from Twilio,
+ * generate Twiml to echo message in response text,
+ * and insert received message into database. */
 router.post('/receivetext', function(req, res) {
   if (twilio.validateExpressRequest(req, TWILIO_AUTH_TOKEN)) {
     var response = "";
